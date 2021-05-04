@@ -1,19 +1,25 @@
-<table>
+<table class="table table-hover table-striped table-sm">
     <thead>
-        <th>Get At</th>
-        <th>USD</th>
-        <th>CAD</th>
-        <th>JPY</th>
-        <th>EUR</th>
+        <th scope="col">Get At</th>
+        <th scope="col">USD</th>
+        <th scope="col">CAD</th>
+        <th scope="col">EUR</th>
+        <th scope="col">JPY</th>
+        <th scope="col">USD/JPY</th>
+        <th scope="col">CAD/JPY</th>
+        <th scope="col">EUR/JPY</th>
     </thead>
     <tbody>
         <% @rates.each do |rate| %>
         <tr>
             <td><%= rate.get_at %></td>
-            <td><%= rate.usd %></td>
-            <td><%= rate.cad %></td>
-            <td><%= rate.jpy %></td>
-            <td><%= rate.eur %></td>
+            <td><%= rate.usd.round(4) %></td>
+            <td><%= rate.cad.round(4) %></td>
+            <td><%= rate.eur.round(4) %></td>
+            <td><%= rate.jpy.round(4) %></td>
+            <td><%= rate.usd_jpy(rate) %></td>
+            <td><%= rate.cad_jpy(rate) %></td>
+            <td><%= rate.eur_jpy(rate) %></td>
         </tr>
         <% end %>
     </tbody>
