@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - 'bin/*'
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - 'config/schedule.rb'
