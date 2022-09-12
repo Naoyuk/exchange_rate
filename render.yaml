@@ -1,0 +1,18 @@
+databases:
+  - name: exchange_rate
+    databaseName: exchange_rate_production
+    user: exchange_rate
+
+services:
+  - type: web
+    name: exchange_rate
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: exchange_rate_production
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
