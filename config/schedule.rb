@@ -8,5 +8,5 @@ job_type :rake,
          'export PATH="$HOME/.rbenv/bin:$PATH"; eval "$(rbenv init -)"; cd :path && RAILS_ENV=:environment bundle exec rake :task :output'
 
 every 1.hour do
-  rake 'fetch'
+  rake 'exchange:fetch'
 end
