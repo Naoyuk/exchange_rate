@@ -15,4 +15,4 @@ production:
   <<: *default
   database: exchange_rate_production
   username: exchange_rate
-  password: <%= ENV['EXCHANGE_RATE_DATABASE_PASSWORD'] %>
+  password: Rails.application.credentials.postgres[:password]
