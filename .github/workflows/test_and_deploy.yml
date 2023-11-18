@@ -19,10 +19,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache Ruby and Node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            node_modules
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-
+            ${{ runner.os }}-npm-
+
+      - name: Set up Ruby
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.6
 
+      - name: Set up Node.js
       - uses: actions/setup-node@v2
         with:
           node-version: 16
@@ -33,6 +47,8 @@ jobs:
           bundle config --local without production
           bundle install
 
+      - name: Run assets precompile
       - run: RAILS_ENV=test bundle exec rails assets:precompile
 
+      - name: Run RSpec
       - run: bundle exec rspec
