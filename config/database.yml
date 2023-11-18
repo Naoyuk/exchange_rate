@@ -5,15 +5,15 @@ default: &default
 
 development:
   <<: *default
-  database: exchange_rate_development
+  database: <%= ENV['POSTGRES_DB_DEV'] %>
 
 test:
   <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['POSTGRES_DB_TEST'] %>
+  password: <%= ENV['POSTGRES_PASSWORD_TEST'] %>
 
 production:
   <<: *default
-  database: exchange_rate_production
-  username: exchange_rate
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['POSTGRES_DB_PROD'] %>
+  password: <%= ENV['POSTGRES_USER_PROD'] %>
+  password: <%= ENV['POSTGRES_PASSWORD_PROD'] %>
