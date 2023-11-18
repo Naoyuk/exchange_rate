@@ -10,11 +10,11 @@ jobs:
     services:
       postgres:
         image: postgres:14
+        env:
+          POSTGRES_DB_TEST: ${{ secrets.PSQL_DB_TEST }}
+          POSTGRES_PASSWORD_TEST: ${{ secrets.PSQL_PASSWORD_TEST }}
         ports:
           - 5432:5432
-        env:
-          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
-          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
 
     steps:
       - uses: actions/checkout@v4
