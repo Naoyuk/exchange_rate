@@ -13,8 +13,8 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: ${{ secrets.PSQL_DB }}
-          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
 
     steps:
       - uses: actions/checkout@v4
