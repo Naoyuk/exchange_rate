@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Clone the source code from GitHub
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Cache Ruby and Node modules
         uses: actions/cache@v2
