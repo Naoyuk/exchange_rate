@@ -13,7 +13,8 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_DB: exchange_rate_test
+          POSTGRES_DB: ${{ secrets.PSQL_DB }}
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
