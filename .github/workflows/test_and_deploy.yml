@@ -17,6 +17,7 @@ jobs:
           - 5432:5432
 
     steps:
+      - name: Clone the source code from GitHub
       - uses: actions/checkout@v4
 
       - name: Cache Ruby and Node modules
@@ -32,12 +33,12 @@ jobs:
             ${{ runner.os }}-npm-
 
       - name: Set up Ruby
-      - uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.6
 
       - name: Set up Node.js
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: 16
 
@@ -48,7 +49,7 @@ jobs:
           bundle install
 
       - name: Run assets precompile
-      - run: RAILS_ENV=test bundle exec rails assets:precompile
+        run: RAILS_ENV=test bundle exec rails assets:precompile
 
       - name: Run RSpec
-      - run: bundle exec rspec
+        run: bundle exec rspec
