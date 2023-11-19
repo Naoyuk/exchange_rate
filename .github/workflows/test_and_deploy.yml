@@ -1,0 +1,67 @@
+name: Test and Deploy with GitHub Actions 🚀
+
+on: [pull_request]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: ${{ secrets.PSQL_USER_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
+          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.6
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Run bundle install
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-v1-${{ hashFiles('Gemfile.lock') }}
+
+      - name: Run bundle install
+        run: |
+          bundle config --local path vendor/bundle
+          bundle config --local without production
+          bundle install
+
+      - name: Cache yarn
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-v1-${{ hashFiles('yarn.lock') }}
+
+      - name: Assets precompile
+        run: RAILS_ENV=test bundle exec rails assets:precompile
+
+      - name: Test with RSpec
+        env:
+          POSTGRES_DB_TEST: ${{ secrets.PSQL_DB_TEST }}
+          POSTGRES_USER_TEST: ${{ secrets.PSQL_USER_TEST }}
+          POSTGRES_PASSWORD_TEST: ${{ secrets.PSQL_PASSWORD_TEST }}
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:setup
+          bundle exec rails db:migrate
+          bundle exec rspec
