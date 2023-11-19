@@ -10,6 +10,16 @@ jobs:
     services:
       postgres:
         image: postgres:14
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: ${{ secrets.PSQL_USER_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
+          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
           - 5432:5432
 
