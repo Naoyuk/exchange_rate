@@ -10,37 +10,25 @@ jobs:
     services:
       postgres:
         image: postgres:14
-        env:
-          POSTGRES_DB_TEST: ${{ secrets.PSQL_DB_TEST }}
-          POSTGRES_PASSWORD_TEST: ${{ secrets.PSQL_PASSWORD_TEST }}
         ports:
           - 5432:5432
 
     steps:
-      - name: Clone the source code from GitHub
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Cache Ruby and Node modules
-        uses: actions/cache@v2
-        with:
-          path: |
-            vendor/bundle
-            node_modules
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-
-            ${{ runner.os }}-npm-
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.6
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
+
+      - name: Run bundle install
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-v1-${{ hashFiles('Gemfile.lock') }}
 
       - name: Run bundle install
         run: |
@@ -48,8 +36,23 @@ jobs:
           bundle config --local without production
           bundle install
 
-      - name: Run assets precompile
+      - name: Cache yarn
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: yarn-v1-${{ hashFiles('yarn.lock') }}
+
+      - name: Assets precompile
         run: RAILS_ENV=test bundle exec rails assets:precompile
 
-      - name: Run RSpec
-        run: bundle exec rspec
+      - name: Test with RSpec
+        env:
+          POSTGRES_HOST_TEST: localhost
+          POSTGRES_DB_TEST: ${{ secrets.PSQL_DB_TEST }}
+          POSTGRES_USER_TEST: ${{ secrets.PSQL_USER_TEST }}
+          POSTGRES_PASSWORD_TEST: ${{ secrets.PSQL_PASSWORD_TEST }}
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:setup
+          bundle exec rails db:migrate
+          bundle exec rspec

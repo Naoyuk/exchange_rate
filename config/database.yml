@@ -9,6 +9,7 @@ development:
 
 test:
   <<: *default
+  host: <%= ENV['POSTGRES_HOST_TEST'] %>
   database: <%= ENV['POSTGRES_DB_TEST'] %>
   password: <%= ENV['POSTGRES_PASSWORD_TEST'] %>
 
