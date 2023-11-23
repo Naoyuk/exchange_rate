@@ -1,0 +1,18 @@
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.17.0/ext/bootsnap
+/usr/local/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1t428xc sitelibdir\=./.gem.20231121-1-1t428xc clean
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1t428xc sitelibdir\=./.gem.20231121-1-1t428xc
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1t428xc sitelibdir\=./.gem.20231121-1-1t428xc install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20231121-1-1t428xc/bootsnap
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.17.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1t428xc sitelibdir\=./.gem.20231121-1-1t428xc clean
