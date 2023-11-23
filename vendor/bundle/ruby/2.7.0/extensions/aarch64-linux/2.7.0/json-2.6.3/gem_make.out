@@ -1,0 +1,16 @@
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+/usr/local/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1vs8fiy sitelibdir\=./.gem.20231121-1-1vs8fiy clean
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1vs8fiy sitelibdir\=./.gem.20231121-1-1vs8fiy
+make: Nothing to be done for 'all'.
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1vs8fiy sitelibdir\=./.gem.20231121-1-1vs8fiy install
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/json-2.6.3/ext/json
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-1vs8fiy sitelibdir\=./.gem.20231121-1-1vs8fiy clean
