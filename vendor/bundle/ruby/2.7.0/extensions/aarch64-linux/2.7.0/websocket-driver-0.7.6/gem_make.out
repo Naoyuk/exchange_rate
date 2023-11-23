@@ -1,0 +1,18 @@
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+/usr/local/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-i6ujgt sitelibdir\=./.gem.20231121-1-i6ujgt clean
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-i6ujgt sitelibdir\=./.gem.20231121-1-i6ujgt
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-i6ujgt sitelibdir\=./.gem.20231121-1-i6ujgt install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20231121-1-i6ujgt
+
+current directory: /var/www/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20231121-1-i6ujgt sitelibdir\=./.gem.20231121-1-i6ujgt clean
