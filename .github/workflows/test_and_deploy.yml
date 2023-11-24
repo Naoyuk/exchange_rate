@@ -57,7 +57,7 @@ jobs:
 
       - name: Check PostgreSQL service health
         run: |
-          until psql -h localhost -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
+          until PGPASSWORD=${{ secrets.PSQL_PASSWORD_TEST }} psql -h localhost -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
             echo 'Waiting for PostgreSQL to become available...'
             sleep 1
           done
