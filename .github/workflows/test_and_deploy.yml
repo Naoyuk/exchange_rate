@@ -55,19 +55,7 @@ jobs:
       - name: Assets precompile
         run: RAILS_ENV=test bundle exec rails assets:precompile
 
-      - name: Check PostgreSQL service health
-        run: |
-          until PGPASSWORD=${{ secrets.PSQL_PASSWORD_TEST }} psql -h 127.0.0.1 -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
-            echo 'Waiting for PostgreSQL to become available...'
-            sleep 1
-          done
-
       - name: Test with RSpec
-        env:
-          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
-          POSTGRES_USER: ${{ secrets.PSQL_USER_TEST }}
-          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
-          RAILS_ENV: test
         run: |
           bundle exec rails db:setup
           bundle exec rails db:migrate
