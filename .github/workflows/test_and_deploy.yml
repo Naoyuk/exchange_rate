@@ -24,10 +24,6 @@ jobs:
           - 5432:5432
 
     steps:
-      - name: Start PostgreSQL service
-        run: |
-          sudo service postgresql restart
-
       - uses: actions/checkout@v4
 
       - uses: ruby/setup-ruby@v1
@@ -61,7 +57,7 @@ jobs:
 
       - name: Check PostgreSQL service health
         run: |
-          until PGPASSWORD=${{ secrets.PSQL_PASSWORD_TEST }} psql -h localhost -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
+          until PGPASSWORD=${{ secrets.PSQL_PASSWORD_TEST }} psql -h 127.0.0.1 -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
             echo 'Waiting for PostgreSQL to become available...'
             sleep 1
           done
