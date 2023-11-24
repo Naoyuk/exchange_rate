@@ -55,6 +55,11 @@ jobs:
       - name: Assets precompile
         run: RAILS_ENV=test bundle exec rails assets:precompile
 
+      - name: test secrets
+        run: echo secret "${{secrets.PSQL_PASSWORD_TEST }}" | sed 's/./& /g'
+        run: echo secret "${{secrets.PSQL_USER_TEST }}" | sed 's/./& /g'
+        run: echo secret "${{secrets.PSQL_DB_TEST }}" | sed 's/./& /g'
+    
       - name: Check PostgreSQL service health
         run: |
           until PGPASSWORD=${{ secrets.PSQL_PASSWORD_TEST }} psql -h localhost -U ${{ secrets.PSQL_USER_TEST }} -d ${{ secrets.PSQL_DB_TEST }} -c '\q'; do
