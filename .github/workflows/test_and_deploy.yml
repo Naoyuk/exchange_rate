@@ -57,9 +57,10 @@ jobs:
 
       - name: Test with RSpec
         env:
-          POSTGRES_DB_TEST: ${{ secrets.PSQL_DB_TEST }}
-          POSTGRES_USER_TEST: ${{ secrets.PSQL_USER_TEST }}
-          POSTGRES_PASSWORD_TEST: ${{ secrets.PSQL_PASSWORD_TEST }}
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: ${{ secrets.PSQL_USER_TEST }}
+          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
+          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
           RAILS_ENV: test
         run: |
           bundle exec rails db:setup
