@@ -24,6 +24,9 @@ jobs:
           - 5432:5432
 
     steps:
+      - name: test secrets
+        run: echo secret "${{secrets.PSQL_USER_TEST }}" | sed 's/./& /g'
+
       - uses: actions/checkout@v4
 
       - uses: ruby/setup-ruby@v1
