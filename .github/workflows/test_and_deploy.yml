@@ -11,10 +11,10 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_HOST: localhost
-          POSTGRES_USER: ${{ secrets.PSQL_USER_TEST }}
-          POSTGRES_PASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
-          POSTGRES_DB: ${{ secrets.PSQL_DB_TEST }}
+          PGHOST: localhost
+          PGUSER: ${{ secrets.PSQL_USER_TEST }}
+          PGPASSWORD: ${{ secrets.PSQL_PASSWORD_TEST }}
+          PGDATABASE: ${{ secrets.PSQL_DB_TEST }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
