@@ -24,6 +24,9 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.18', require: false
+  gem 'capistrano-rails', '~> 1.6', require: false
+  gem 'capistrano-rbenv', '~> 2.2'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
