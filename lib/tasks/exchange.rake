@@ -6,7 +6,8 @@ namespace :exchange do
     require 'open-uri'
     require 'json'
 
-    api_key = Rails.application.credentials.openexchangerates[:app_id]
+    # api_key = Rails.application.credentials.openexchangerates[:app_id]
+    api_key = ENV['OPENEXCHANGERATES_APP_ID']
     uri = "https://openexchangerates.org/api/latest.json?app_id=#{api_key}"
 
     response = URI.parse(uri).open
